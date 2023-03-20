@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+import "@aws-amplify/ui-react/styles.css";
+import {
+  withAuthenticator,
+  Button,
+  Heading,
+  Image,
+  View,
+  Card,
+} from "@aws-amplify/ui-react";
 
 const defaultFormData = { name: "", desc: "" };
 const defaultPostData = [];
-const App = () => {
+function App({ signOut }) {
   const [formData, setFormData] = useState(defaultFormData);
   const [posts, setPosts] = useState(defaultPostData);
 
@@ -26,6 +35,9 @@ const App = () => {
 
   return (
     <div>
+      <div className="top-section">
+        <Button onClick={signOut}>Sign Out</Button>
+      </div>
       <div className="form-section">
         <form onSubmit={handleSubmit}>
           <label>
@@ -63,6 +75,6 @@ const App = () => {
       )}
     </div>
   );
-};
+}
 
-export default App;
+export default withAuthenticator(App);
